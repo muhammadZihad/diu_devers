@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function socials()
+    {
+        $this->belongsToMany(Social::class)->withPivot('link');
+    }
+    public function skills()
+    {
+        $this->belongsToMany(Skill::class);
+    }
+    public function university()
+    {
+        $this->hasOne(University::class);
+    }
 }
