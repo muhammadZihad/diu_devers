@@ -39,14 +39,27 @@ class User extends Authenticatable
 
     public function socials()
     {
-        $this->belongsToMany(Social::class)->withPivot('link');
+        return $this->belongsToMany(Social::class)->withPivot('link');
     }
     public function skills()
     {
-        $this->belongsToMany(Skill::class);
+        return $this->belongsToMany(Skill::class, 'skill_user');
     }
     public function university()
     {
-        $this->hasOne(University::class);
+        return $this->hasOne(University::class);
+    }
+
+    public function interests()
+    {
+        return $this->belongsToMany(Skill::class, 'interest_user', 'user_id', 'skill_id');
+    }
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id')->withTimestamps();
+    }
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'following_user', 'user_id', 'following_id')->withTimestamps();
     }
 }

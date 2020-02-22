@@ -13,6 +13,6 @@ class Social extends Model
 
     public function users()
     {
-        $this->belongsToMany(User::class)->withPivot('link');
+        return $this->belongsToMany(User::class)->withPivot('link');
     }
 }
