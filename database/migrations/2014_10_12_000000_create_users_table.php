@@ -19,7 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('secondary_email')->nullable();
-            $table->string('avater')->nullable();
+            $table->string('avatar')->nullable();
+            $table->text('about')->nullable();
+            $table->string('slug')->nullable()->unique();
+            $table->boolean('gender')->nullable();
             $table->string('phone')->nullable();
             $table->integer('university_id')->nullable();
             $table->date('date_of_birth')->nullable();

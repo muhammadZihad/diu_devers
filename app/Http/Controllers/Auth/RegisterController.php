@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gender' => 'required',
         ]);
     }
 
@@ -64,10 +65,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        if ($data['gender']) {
+            $avatar = 'default/avatar/male.png';
+        } else {
+            $avatar = 'default/avatar/female.png';
+        }
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'avatar' => $avatar,
+            'password' => bcrypt($data['password']),
         ]);
+
+        $user->slug = str_slug($user->name) . '-' . $user->id;
+        $user->save();
+        dd($user);
+        return $user;
     }
 }
