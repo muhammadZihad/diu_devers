@@ -14,14 +14,18 @@
                         </div>
                     @endif
 
-                    You are logged in!
-                    <ul class="collection with-header">
-                        <li class="collection-header"><h4>Profiles</h4></li>
-                        @foreach ($users as $item)
-                            
-                    <li class="collection-item"><div>{{ $item->name }}<a href="{{route('profile',['slug'=>$item->slug])}}" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                        @endforeach
-                      </ul>
+                    @foreach ($users as $item)
+                    <div class="card text-center" style="width: 18rem;">
+                        <img style="max-width:150px;max-height:150px;" src="{{Storage::url($item->avatar)}}" class="card-img-top mx-auto" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ $item->name }}</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <div class="card-body">
+                        <a href="{{route('profile.show',$item->slug)}}" class="card-link">View Profile</a>
+                        </div>
+                      </div>
+                    @endforeach
                             
                 </div>
             </div>

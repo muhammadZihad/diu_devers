@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+
+
+
 @section('content')
     <div id="app" class="container">
       <div class="row">
@@ -7,7 +10,7 @@
 
           <div class="card blue-grey darken-2">
             <div class="card-content white-text">
-              <a class="btn btn-floating btn-sm teal darken-1 pulse right"><i class="material-icons">edit</i></a>
+            <a href="{{ route('profile.edit',$user->slug)}}" class="btn btn-floating btn-sm teal darken-1 pulse right"><i class="material-icons">edit</i></a>
               <div class="card-image center-align">
               <img style="height:200px !important;max-width:200px !important; margin:0 auto;" src="{{Storage::url($user->avatar)}}" alt="">
               </div>
@@ -16,7 +19,7 @@
                 <div class="row">
 
               <ul class="tabs blue-grey darken-2">
-                  <li class="tab "><a class="white-text" href="#foo">About</a></li>
+                  <li class="tab"><a class="white-text" href="#foo">About</a></li>
                   <li class="tab"><a class="white-text" href="#bar">Skill</a></li>
               </ul>
             
@@ -69,11 +72,13 @@
                     @endif
                     <tr>
                       <td>Gender</td>
-                      <td>@if ($user->gender)
+                      <td>
+                      @if ($user->gender)
                           Male
                       @else
                           Female
-                      @endif</td>
+                      @endif
+                      </td>
                     </tr>
                     <tr>
                       <td>University</td>
@@ -102,8 +107,6 @@
 
 @section('js')
     <script>
-      $(document).ready(function(){
-        $('ul.tabs').tabs();
-      });
+
     </script>
 @endsection

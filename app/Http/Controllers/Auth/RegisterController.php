@@ -80,7 +80,6 @@ class RegisterController extends Controller
 
         $user->slug = str_slug($user->name) . '-' . $user->id;
         $user->save();
-        dd($user);
         return $user;
     }
 }

@@ -56,9 +56,10 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $user = User::where('slug', $slug)->first();
+        return view('profile.edit')->with('user', $user);
     }
 
     /**
@@ -70,7 +71,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
