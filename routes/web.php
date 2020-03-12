@@ -11,6 +11,7 @@
 |
 */
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::get('/', function () {
 });
 Route::get('/frnd', function () {
     return Auth::user()->friends();
+});
+Route::get('/friend_status/{id}', function ($id) {
+    return User::find($id);
 });
 
 Auth::routes();
