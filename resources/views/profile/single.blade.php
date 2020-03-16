@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div id="app" class="container">
+    <div class="container">
       <div class="row">
         <div class="col-md-8 col-sm-12">
           <div class="card">
@@ -12,8 +12,7 @@
               <div class="card-image center-align">
               <img class="card-img-top d-block mx-auto" style="height:200px !important;max-width:200px !important; margin:0 auto;" src="{{Storage::url($user->avatar)}}" alt="">
               </div>
-              <div class="card-header"><span class="card-title">{{ $user->name }}<friend-btn :user_id={{$user->id}}></friend-btn></span>  <p>{{ $user->about }} </p>
-              
+              <div class="card-header mt-2"><div class="card-title"><span class="h4">{{ $user->name }}</span><friend-btn :user_id={{$user->id}}></friend-btn></div>  <p>{{ $user->about }} </p>              
               </div>
               <div class="card-body">
                 <ul class="nav nav-tabs d-flex" id="myTab" role="tablist">
@@ -108,9 +107,7 @@
 
                   </div>
                 </div>
-
             </div>
-
           </div>
         </div>
       </div>

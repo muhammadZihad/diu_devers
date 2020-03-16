@@ -8,7 +8,7 @@ use App\User;
 trait Friendable
 {
 
-    public function add_friend($req_to)
+    public function add_friend($req_to)   //_________________ Add Friend Request
     {
         $frndshp = Friendship::create([
             'req_to' => $req_to,
@@ -21,7 +21,7 @@ trait Friendable
         return response()->json('fail', 501);
     }
 
-    public function accept_friend($req_by)
+    public function accept_friend($req_by)     //_________________ Accept Friend Request
     {
         $frndshp = Friendship::where('req_by', $req_by)->where('req_to', $this->id)->first();
 
@@ -33,36 +33,83 @@ trait Friendable
         return response()->json('fail', 501);
     }
 
+    public function unfriend($id)     //_________________ Unfriend
+    {
+        $GLOBALS['id_for_check'] = $id;
+        $frndshp =  Friendship::where('status', 1)->where(function ($q1) {
+            $q1->where('req_by', $this->id)->where('req_to', $GLOBALS['id_for_check']);
+        })->orWhere(function ($q) {
+            $q->where('req_by', $GLOBALS['id_for_check'])->where('req_to', $this->id);
+        })->first();
+
+        if ($frndshp) {
+            $frndshp->delete();
+            return response()->json('ok', 200);
+        }
+        return response()->json('fail', 501);
+    }
+
+    public function cancel_request($id)
+    {
+        $GLOBALS['id_for_check'] = $id;
+        $data = Friendship::where('status', 0)->where(function ($q1) {
+            $q1->where('req_by', $this->id)->where('req_to', $GLOBALS['id_for_check']);
+        })->orWhere(function ($q) {
+            $q->where('req_by', $GLOBALS['id_for_check'])->where('req_to', $this->id);
+        })->first();
+        if ($data->delete()) {
+            return response()->json('ok', 200);
+        } else {
+            return response()->json('fail', 501);
+        }
+    }
+
     public function friends()
     {
-        $frnds1 = array();
-        $frnds2 = array();
+        $frnds = array();
 
-        // -------- This is for getting all friends together
-        // $f1 = Friendship::where('status', 1)->where(function ($q) {
-        //     $q->where('req_by', $this->id)->orWhere('req_to', $this->id);
-        // })->get();
-
-        $f1 = Friendship::where('status', 1)->where('req_to', $this->id)->get();
+        $f1 = Friendship::where('status', 1)->where(function ($q) {
+            $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
+        })->get();
         foreach ($f1 as $ff) {
-            array_push($frnds1, User::find($ff->req_by));
+            array_push($frnds, User::find($ff->req_by));
         }
-        $f2 = Friendship::where('status', 1)->where('req_by', $this->id)->get();
-        foreach ($f2 as $ff) {
-            array_push($frnds2, User::find($ff->req_to));
+        return $frnds;
+    }
+    public function friends_paginate()
+    {
+        $frnds = array();
+        $result = array();
+        $f1 = Friendship::where('status', 1)->where(function ($q) {
+            $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
+        })->paginate(1);
+        foreach ($f1 as $ff) {
+            array_push($frnds, User::find($ff->req_by));
         }
-        return array_merge($frnds1, $frnds2);
+        $result["data"] = $frnds;
+        $result["first"] = $f1->onFirstPage();
+        $result["prev"] = $f1->previousPageUrl();
+        $result["next"] = $f1->nextPageUrl();
+        $result["more"] = $f1->hasMorePages();
+        return $result;
     }
 
     public function friend_requests()
     {
-        $frnds1 = array();
-
-        $f1 = Friendship::where('status', 0)->where('req_to', $this->id)->get();
+        $result = array();
+        $frnds = array();
+        $link = array();
+        $f1 = Friendship::where('status', 0)->where('req_to', $this->id)->paginate(1);
+        // return $f1->nextPageUrl();
         foreach ($f1 as $ff) {
-            array_push($frnds1, User::find($ff->req_by));
+            array_push($frnds, User::find($ff->req_by));
         }
-        return $frnds1;
+        $result["data"] = $frnds;
+        $result["first"] = $f1->onFirstPage();
+        $result["prev"] = $f1->previousPageUrl();
+        $result["next"] = $f1->nextPageUrl();
+        $result["more"] = $f1->hasMorePages();
+        return $result;
     }
 
     public function friend_ids()
@@ -76,6 +123,26 @@ trait Friendable
             return response()->json('true', 200);
         } else {
             return response()->json('false', 200);
+        }
+    }
+    public function check_status($id)
+    {
+        $GLOBALS['id_for_check'] = $id;
+        $data = Friendship::where(function ($q1) {
+            $q1->where('req_by', $this->id)->where('req_to', $GLOBALS['id_for_check']);
+        })->orWhere(function ($q) {
+            $q->where('req_by', $GLOBALS['id_for_check'])->where('req_to', $this->id);
+        })->first();
+        if ($data) {
+            if ($data->status == 1) {
+                return 0;
+            } elseif ($data->req_by == $this->id) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else {
+            return -1;
         }
     }
 }

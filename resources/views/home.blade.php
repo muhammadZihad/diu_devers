@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-11">
+    <div class="row">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -27,6 +27,21 @@
                       </div>
                     @endforeach
                             
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">Activities</div>
+                <div class="card-body">
+                    <h4 class="text-center">Friend Request</h4>
+                    <hr>
+                    <friend-req :myid="{{auth()->user()->id}}"></friend-req>
+                    <hr class="mb-2">
+                    <h4 class="text-center">Friends</h4>
+                    <hr>
+                    <friends-list></friends-list>
                 </div>
             </div>
         </div>

@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/frnd', function () {
-    return Auth::user()->friends();
-});
-Route::get('/friend_status/{id}', function ($id) {
-    return User::find($id);
-});
+Route::get('/friends', 'FriendController@friends');
+Route::get('/friends_paginate', 'FriendController@friends_paginate');
+Route::get('/friend_status/{id}', 'FriendController@friendship_status');
+Route::get('/accept_request/{id}', 'FriendController@accept_friend');
+Route::get('/add_friend/{id}', 'FriendController@add_friend');
+Route::get('/unfriend/{id}', 'FriendController@unfriend');
+Route::get('/friend_requests/{id}', 'FriendController@friend_requests');
+Route::get('/cancel_request/{id}', 'FriendController@cancel_request');
 
 Auth::routes();
 
