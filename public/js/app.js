@@ -2141,7 +2141,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getRequests();
-    this.check_list();
   },
   methods: {
     getRequests: function getRequests() {
@@ -2157,6 +2156,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.more = response.data.more;
         _this.next = response.data.next;
+
+        _this.check_list();
       });
     },
     loadmore: function loadmore(nextUrl) {
@@ -2178,6 +2179,8 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data === "ok") {
           //   this.getRequests();
           _this3.lists.splice(index, 1);
+
+          _this3.check_list();
         }
       });
     },
@@ -2191,6 +2194,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     check_list: function check_list() {
+      console.log(this.lists);
+
       if (this.lists.length === 0) {
         this.stop = true;
       }
@@ -47681,7 +47686,7 @@ var render = function() {
       { staticClass: "list-group list-group-flush" },
       [
         _vm.stop
-          ? _c("li", { staticClass: "list-group-item" }, [
+          ? _c("li", { staticClass: "list-group-item text-center text-info" }, [
               _vm._v("No requests")
             ])
           : _vm._l(_vm.lists, function(item, index) {
@@ -60005,7 +60010,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "9c2eaa60f96b3cb035c8",
   cluster: "ap1",
-  encrypted: true
+  forceTLS: true
 });
 
 Pusher.log = function (message) {

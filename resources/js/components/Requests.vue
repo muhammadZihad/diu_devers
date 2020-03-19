@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-if="stop">No requests</li>
+      <li v-if="stop" class="list-group-item text-center text-info">No requests</li>
       <li v-else class="list-group-item" v-for="(item, index) in lists" :key="item.id">
         <div class="media-body">
           <h5 class="mt-0 mb-1">{{ item.name }}</h5>
@@ -34,7 +34,6 @@ export default {
   },
   mounted() {
     this.getRequests();
-    this.check_list();
   },
   methods: {
     getRequests() {
@@ -48,6 +47,7 @@ export default {
         // }
         this.more = response.data.more;
         this.next = response.data.next;
+        this.check_list();
       });
     },
     loadmore(nextUrl) {
@@ -65,6 +65,7 @@ export default {
         if (response.data === "ok") {
           //   this.getRequests();
           this.lists.splice(index, 1);
+          this.check_list();
         }
       });
     },
@@ -76,6 +77,7 @@ export default {
       });
     },
     check_list() {
+      console.log(this.lists);
       if (this.lists.length === 0) {
         this.stop = true;
       }

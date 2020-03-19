@@ -81,13 +81,23 @@
             @yield('content')
 
         {{-- <noty :myid="{{auth()->user()->id}}">
-            </noty> --}}
-        </main>
+            </noty>
+        </main> --}}
     </div>
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
     @yield('js')
-    
+    {{-- @if(Session::has('success'))
+    <script>
+            noty({
+            theme: 'sunset',
+            type: 'success',
+            layout: 'topRight',
+            text: '{{ Session::get('success') }}'
+        }).show();
+        
+    </script>
+    @endif --}}
 </body>
 </html>
