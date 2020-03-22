@@ -43,6 +43,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+    public function completed()
+    {
+        return $this->complete_setup;
+    }
     public function socials()
     {
         return $this->belongsToMany(Social::class)->withPivot('link');

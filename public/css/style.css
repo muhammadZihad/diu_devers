@@ -17,6 +17,9 @@
   .login-heading {
     font-weight: 300;
   }
+  h1.login-heading {
+    font-weight: 400;
+  }
    
   .btn-login {
     font-size: 0.9rem;
@@ -126,7 +129,7 @@
       }
        
       .bg-image {
-        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/form-bk.jpg');
+        /* background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/form-bk.jpg'); */
         background-size: cover;
         background-position: center;
       }
