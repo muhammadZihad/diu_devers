@@ -11,10 +11,11 @@
           <div class="card overflow-hidden">
             <div class="card-header text-white bg-custom text-center">Profile Picture</div>
             <div class="card nb">
-            <img class="card-img-top" src="{{Storage::url($user->avatar)}}" alt="">
+            <img class="card-img-top img-thumbnail" src="{{Storage::url($user->avatar)}}" alt="">
             <div class="card-body">
               @if (auth()->user()->id == $user->id)
-              <form action="{{route('image-save')}}" enctype="multipart/form-data">
+              <form action="{{route('image-save')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group">
                   <input class="form-control" type="file" name="image" id="">
                 </div>

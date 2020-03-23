@@ -59,7 +59,14 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu nr" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('profile.show',auth()->user()->slug) }}">
+                                    My profile
+                                </a>
+                                <a class="dropdown-item" href="{{ route('profile.edit',auth()->user()->slug) }}">
+                                    Edit profile
+                                </a>
+                                <hr>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -69,6 +76,7 @@
                                     style="display: none;">
                                     @csrf
                                 </form>
+                                
                             </div>
                         </li>
                         @endguest
