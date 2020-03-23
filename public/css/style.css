@@ -90,6 +90,32 @@
     color: #777;
   }
    
+  .card,.card-header:first-child{
+    border-radius: 0;
+  }
+  .nb{
+    border: none;
+  }
+  .form-control{
+    border-radius: 0;
+  }
+
+  .bg-custom{
+    background: #2BBD91 !important;
+  }
+
+  span.chp{
+    background: #fe346e;
+    padding: 2px 7px;
+    display: inline-block;
+    color: white;
+  }
+  .chp.cmn{
+    background: #2BBD91;
+  }
+  .cmntxt{
+    color: #2BBD91;
+  }
   /* Fallback for Edge
   -------------------------------------------------- */
    

@@ -55,9 +55,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'skill_user');
     }
+    public function hasSkill($sid)
+    {
+        return in_array($sid, $this->skills->pluck('id')->toArray());
+    }
     public function university()
     {
-        return $this->hasOne(University::class);
+        return $this->belongsTo(University::class);
     }
 
     public function interests()

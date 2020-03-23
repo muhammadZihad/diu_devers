@@ -84,6 +84,9 @@ class ProfileController extends Controller
         //      
     }
 
+    public function image_change()
+    {
+    }
     /**
      * Display the specified resource.
      *
