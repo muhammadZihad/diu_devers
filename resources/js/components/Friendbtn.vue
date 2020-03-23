@@ -1,18 +1,30 @@
 <template>
-  <div class="float-right">
-    <button v-if="status===1" @click="cancel_request()" class="btn btn-sm btn-danger">Cancel Request</button>
+  <div class="form-group d-flex">
     <button
+      v-if="status===1"
+      @click="cancel_request()"
+      class="btn form-control nb text-white btn-danger"
+    >Cancel Request</button>
+    <button
+      class="btn form-control nb bg-custom"
       v-else-if="status===2"
       @click="accept_request()"
-      class="btn btn-sm btn-info"
-    >Accept Request</button>
-    <button v-else-if="status===-1" @click="add_friend()" class="btn btn-sm btn-success">+Add friend</button>
+    >Accept</button>
+    <button
+      v-else-if="status===-1"
+      @click="add_friend()"
+      class="btn form-control nb text-white bg-custom"
+    >Add me</button>
     <button
       v-else-if="status===0"
       @click="unfriend()"
-      class="btn btn-sm btn-secondary float-right"
+      class="btn btn-secondary form-control nb"
     >Unfriend</button>
-    <button v-if="status===2" @click="cancel_request()" class="btn btn-sm btn-danger">Cancel</button>
+    <button
+      v-if="status===2"
+      @click="cancel_request()"
+      class="btn form-control nb btn-danger"
+    >Cancel</button>
   </div>
 </template>
 

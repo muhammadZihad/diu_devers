@@ -1,114 +1,100 @@
 @extends('layouts.app')
 
-
-
+@section('title')
+{{ $user->name }}
+@endsection
 
 @section('content')
     <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-12">
-          <div class="card">
-            <a href="{{ route('profile.edit',$user->slug)}}" class="btn btn-floating btn-sm teal darken-1 pulse right"><i class="material-icons">edit</i></a>
-              <div class="card-image center-align">
-              <img class="card-img-top d-block mx-auto" style="height:200px !important;max-width:200px !important; margin:0 auto;" src="{{Storage::url($user->avatar)}}" alt="">
-              </div>
-              <div class="card-header mt-2"><div class="card-title"><span class="h4">{{ $user->name }}</span><friend-btn :user_id={{$user->id}}></friend-btn></div>  <p>{{ $user->about }} </p>              
-              </div>
-              <div class="card-body">
-                <ul class="nav nav-tabs d-flex" id="myTab" role="tablist">
-                  <li class="nav-item flex-fill">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#basic" role="tab" aria-controls="home" aria-selected="true">Basic</a>
-                  </li>
-                  <li class="nav-item flex-fill">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#social" role="tab" aria-controls="profile" aria-selected="false">Socials</a>
-                  </li>
-                  <li class="nav-item flex-fill">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#skill" role="tab" aria-controls="profile" aria-selected="false">Skill</a>
-                  </li>
-                </ul>
-          
-
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="home-tab">
-                    <div id="foo" class="col s12">
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>Email</td>
-                            <td>{{ $user->email }}</td>
-                          </tr>
-                          @if ($user->secondary_email)
-                          <tr>
-                            <td>Email</td>
-                            <td>{{ $user->secondary_email }}</td>
-                          </tr>
-                          @endif
-                          <tr>
-                            <td>Gender</td>
-                            <td>@if ($user->gender)
-                                Male
-                            @else
-                                Female
-                            @endif</td>
-                          </tr>
-                          <tr>
-                            <td>University</td>
-                            <td>Daffodil International University (BSc in CSE)</td>
-                          </tr>
-                          @foreach ($user->socials as $social)
-                          <tr>
-                            <td>{{ $social->name}}</td>
-                          <td>  <a class="white-text" href="{{ $social->pivot->link }}" target="blank"><img class="mr-2" width="16px" src="{{Storage::url($social->avater) }}" alt="">{{  $social->pivot->link    }}</a> </td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="profile-tab">
-                    <div id="bar" class="col s12">
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td>Email</td>
-                            <td>{{ $user->email }}</td>
-                          </tr>
-                          @if ($user->secondary_email)
-                          <tr>
-                            <td>Email</td>
-                            <td>{{ $user->secondary_email }}</td>
-                          </tr>
-                          @endif
-                          <tr>
-                            <td>Gender</td>
-                            <td>
-                            @if ($user->gender)
-                                Male
-                            @else
-                                Female
-                            @endif
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>University</td>
-                            <td>Daffodil International University (BSc in CSE)</td>
-                          </tr>
-                          @foreach ($user->socials as $social)
-                          <tr>
-                            <td>{{ $social->name}}</td>
-                          <td>  <a class="white-text" href="{{ $social->pivot->link }}" target="blank"><img class="mr-2" width="16px" src="{{Storage::url($social->avater) }}" alt="">{{  $social->pivot->link    }}</a> </td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="contact-tab">
-
-                  </div>
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <div class="card overflow-hidden">
+            <div class="card-header text-white bg-custom text-center">Profile Picture</div>
+            <div class="card nb">
+            <img class="card-img-top img-thumbnail" src="{{Storage::url($user->avatar)}}" alt="">
+            <div class="card-body">
+              @if (auth()->user()->id == $user->id)
+              <form action="{{route('image-save')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                  <input class="form-control" type="file" name="image" id="">
                 </div>
+                <input class="btn btn-sm bg-custom nb text-white form-control" type="submit" value="Save">
+              </form>
+              @else
+              <div class="form-group">
+                <button class="btn form-control nb bg-custom text-white">Hello, there !</button>
+              </div>
+              <friend-btn :user_id="{{$user->id}}"></friend-btn>
+              @endif
+            </div>
             </div>
           </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+          <div class="card-header bg-custom text-white h5">{{$user->name}}</div>
+          <div class="card-body">
+           
+
+            <blockquote class="blockquote mb-5">
+              <p class="h6 mb-0">{{ $user->profile->about }}</p>
+            <footer class="blockquote-footer text-right">About me</footer>
+            </blockquote>
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th><i class="fas fa-user-tie"></i> Name</th>
+                  <th>{{ $user->name }}</th>
+                </tr>
+                <tr>
+                  <td class="text-nowrap"><i class="fas fa-envelope-open"></i></i> Primary email</td>
+                <td><a href="mailto:{{$user->email}}">{{ $user->email}}</a> </td>
+                </tr>
+                <tr>
+                  <td class="text-nowrap"><i class="fas fa-envelope"></i> Secondary email</td>
+                  <td><a href="mailto:{{$user->secondary_email}}">{{ $user->secondary_email ?: 'N/A' }}</a></td>
+                </tr>
+                <tr>
+                  <td class="text-nowrap"><i class="fas fa-graduation-cap"></i> University</td>
+                  <td>{{ $user->university->name ?: 'N/A'}}</td>
+                </tr>
+                <tr>
+                  <td class="text-nowrap"><i class="fas fa-phone-square-alt"></i> Phone</td>
+                  <td>{{ $user->profile->phone ?: 'N/A' }}</td>
+                </tr>
+                <tr>
+                  <td><i class="fab fa-facebook-square"> Facebook </td>
+                <td><u> <a href="{{$user->social->fb}}" target="_blank">{{ $user->social->fb ?: 'N/A'}}</u></a></td>
+                </tr>
+                <tr>
+                  <td><i class="fab fa-github-square"> Github </td>
+                  <td><u><a href="{{$user->social->git}}" target="_blank">{{ $user->social->git ?: 'N/A'}}</u></a></td>
+                </tr>
+                <tr>
+                  <td><i class="fab fa-linkedin"> LinkedIn </i></td>
+                  <td><u><a href="{{$user->social->l_i}}" target="_blank">{{ $user->social->l_i ?: 'N/A'}}</u></a></td>
+                </tr>
+                {{-- <tr>
+                  <td>Stack Overflow</td>
+                  <td>{{ $user->social->s_o ?: 'N/A'}}</td>
+                </tr> --}}
+
+                <tr>
+                  <td><i class="fas fa-cogs"></i>  Skills</td>
+                  <td>
+                    @foreach ($user->skills as $item)
+                        <span class="chp mb-1 {{auth()->user()->hasSkill($item->id) ? 'cmn' : ''}} "> {{ $item->name }} </span>
+                    @endforeach
+                    <small class="form-text cmntxt">This is the color of common skills</small>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          </div>
+
         </div>
       </div>
     </div>

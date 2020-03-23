@@ -84,6 +84,24 @@ class ProfileController extends Controller
         //      
     }
 
+    public function image_change(Request $request)
+    {
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+        $user = User::find(auth()->user()->id);
+        // $user->deleteImage();
+
+        if ($user->avatar != 'default/avatar/male.png' && $user->avatar != 'default/avatar/female.png') {
+            $user->deleteImage();
+        }
+        $image = $request->image->store('avatar');
+        $user->avatar = $image;
+        $user->save();
+        return redirect(route('profile.show', $user->slug));
+    }
     /**
      * Display the specified resource.
      *

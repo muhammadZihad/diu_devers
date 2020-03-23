@@ -1926,6 +1926,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -47481,12 +47493,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "float-right" }, [
+  return _c("div", { staticClass: "form-group d-flex" }, [
     _vm.status === 1
       ? _c(
           "button",
           {
-            staticClass: "btn btn-sm btn-danger",
+            staticClass: "btn form-control nb text-white btn-danger",
             on: {
               click: function($event) {
                 return _vm.cancel_request()
@@ -47499,33 +47511,33 @@ var render = function() {
       ? _c(
           "button",
           {
-            staticClass: "btn btn-sm btn-info",
+            staticClass: "btn form-control nb bg-custom",
             on: {
               click: function($event) {
                 return _vm.accept_request()
               }
             }
           },
-          [_vm._v("Accept Request")]
+          [_vm._v("Accept")]
         )
       : _vm.status === -1
       ? _c(
           "button",
           {
-            staticClass: "btn btn-sm btn-success",
+            staticClass: "btn form-control nb text-white bg-custom",
             on: {
               click: function($event) {
                 return _vm.add_friend()
               }
             }
           },
-          [_vm._v("+Add friend")]
+          [_vm._v("Add me")]
         )
       : _vm.status === 0
       ? _c(
           "button",
           {
-            staticClass: "btn btn-sm btn-secondary float-right",
+            staticClass: "btn btn-secondary form-control nb",
             on: {
               click: function($event) {
                 return _vm.unfriend()
@@ -47540,7 +47552,7 @@ var render = function() {
       ? _c(
           "button",
           {
-            staticClass: "btn btn-sm btn-danger",
+            staticClass: "btn form-control nb btn-danger",
             on: {
               click: function($event) {
                 return _vm.cancel_request()

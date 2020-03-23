@@ -37,6 +37,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'complete']], function () {
     Route::get('/friends', 'FriendController@friends');
     Route::get('/friends_paginate', 'FriendController@friends_paginate');
+    Route::post('/profileimage/store', 'ProfileController@image_change')->name('image-save');
     Route::get('/friend_status/{id}', 'FriendController@friendship_status');
     Route::get('/accept_request/{id}', 'FriendController@accept_friend');
     Route::get('/add_friend/{id}', 'FriendController@add_friend');

@@ -6,6 +6,7 @@ use App\Traits\Friendable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -55,9 +56,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'skill_user');
     }
+    public function hasSkill($sid)
+    {
+        return in_array($sid, $this->skills->pluck('id')->toArray());
+    }
     public function university()
     {
-        return $this->hasOne(University::class);
+        return $this->belongsTo(University::class);
     }
 
     public function interests()
@@ -71,5 +76,9 @@ class User extends Authenticatable
     public function followings()
     {
         return $this->belongsToMany(User::class, 'following_user', 'user_id', 'following_id')->withTimestamps();
+    }
+    public function deleteImage()
+    {
+        unlink('storage/' . $this->avatar);
     }
 }

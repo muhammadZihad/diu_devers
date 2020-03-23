@@ -90,6 +90,52 @@
     color: #777;
   }
    
+  .card,.card-header:first-child{
+    border-radius: 0;
+  }
+  .nb{
+    border: none;
+  }
+  .form-control{
+    border-radius: 0;
+  }
+
+  .bg-custom{
+    background: #2BBD91 !important;
+  }
+
+  span.chp{
+    background: #fe346e;
+    padding: 2px 7px;
+    display: inline-block;
+    color: white;
+  }
+  .chp.cmn{
+    background: #2BBD91;
+  }
+  .cmntxt{
+    color: #2BBD91;
+  }
+
+  .nr{
+    border-radius: 0;
+  }
+  .nr a:hover{
+    background: #2BBD91;
+    color: white;
+  }
+  .navbar-toggler{
+    border-radius: none !important;
+    border-color: #2BBD91 !important;
+  }
+  .text-custom{
+    color: #2BBD91 !important;
+  }
+  .mlogo{
+    font-size: 1.5rem;
+    padding: 0;
+    font-weight: 600;
+  }
   /* Fallback for Edge
   -------------------------------------------------- */
    
