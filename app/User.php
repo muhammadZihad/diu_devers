@@ -47,9 +47,9 @@ class User extends Authenticatable
     {
         return $this->complete_setup;
     }
-    public function socials()
+    public function social()
     {
-        return $this->belongsToMany(Social::class)->withPivot('link');
+        return $this->hasOne(Social::class);
     }
     public function skills()
     {

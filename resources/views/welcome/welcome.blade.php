@@ -11,6 +11,13 @@
     <script src="https://kit.fontawesome.com/416893b2fc.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-light">
+  <script>
+
+    function pp(){
+    let tbox = document.getElementById('exampleFormControlTextarea1');
+      document.getElementById('count').innerHTML = tbox.value.length+"/350";
+    }
+  </script>
     <nav class="navbar navbar-light bg-light">
         <span class="navbar-brand mb-0 h1 logo">Dever's</span>
         <ul class="navbar-nav">
@@ -34,35 +41,35 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form action="" method="post">
+            <form action="{{route('w_store')}}" method="post">
+              @csrf
                     <div class="form-group mb-4">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us something about yourself..."></textarea>
+                        <textarea onkeypress="pp()" name="about" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us something about yourself in less than 350 characters..."></textarea>
+                        <span id="count" class="countchar">0/350</span>
                     </div>
 
                     <div class="form-group mb-4">
                         <label for="exampleFormControlSelect1"><i class="fas fa-cogs"></i> Interested technology</label>
-                        <select class="js-select1 form-control " id="exampleFormControlSelect1" multiple>
-                          <option>Hello</option>
-                          <option>manala</option>
-                          <option>pajsala</option>
-                          <option>jeaosid</option>
-                          <option>faawds</option>
+                        <select maxlength="50" name="skills[]" class="js-select1 form-control " id="exampleFormControlSelect1" multiple>
+                          @foreach ($skills as $item)
+                        <option value="{{ $item->id }}">{{$item->name}}<option>
+                          @endforeach
                         </select>
                       </div>
 
                       <div class="form-group">
                         <label for="exampleInputEmail1"><i class="fab fa-github-square"></i> Github link</label>
-                        <input type="text" class="form-control"  placeholder="https://github.com/....">
+                        <input name="git" type="text" class="form-control"  placeholder="https://github.com/....">
                       </div>
 
                       <div class="form-group">
                         <label for="exampleInputEmail1"><i class="fab fa-facebook-square"></i></i> Facebook link</label>
-                        <input type="text" class="form-control" placeholder="https://facebook.com/....">
+                        <input name="fb" type="text" class="form-control" placeholder="https://facebook.com/....">
                       </div>
 
                       <div class="form-group mb-4">
                         <label for="exampleInputEmail1"><i class="fab fa-linkedin"></i> LinkedIn link</label>
-                        <input type="text" class="form-control" placeholder="https://linkedin.com/....">
+                        <input name="l_i" type="text" class="form-control" placeholder="https://linkedin.com/....">
                       </div>
 
                       <div class="form-group mt-3">
@@ -72,7 +79,7 @@
                                       style="display: none;">
                                       @csrf
                                   </form>
-                        <button type="submit" class="btn mbtn sbtn float-right">Save & let me in</button>
+                        <input type="submit" class="btn mbtn sbtn float-right" value="Save & let me in">
                       </div>
 
                     </form>
@@ -91,7 +98,6 @@ $(document).ready(function() {
             tags:true,
         });
 });
-
 
 </script>
 </body>

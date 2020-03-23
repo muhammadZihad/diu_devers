@@ -19,10 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => ['auth', 'notwelcome']], function () {
+    Route::get('/welcome', 'ProfileController@welcome')->name('welcome');
+    Route::post('/welcome/store', 'ProfileController@welcome_store')->name('w_store');
+});
 
-Route::get('/welcome', function () {
-    return view('welcome.welcome');
-})->name('welcome')->middleware('auth', 'notwelcome');
 
 // Route::get('login', 'AuthController@index')->name('login');
 // Route::post('post-login', 'AuthController@postLogin');

@@ -8,11 +8,11 @@ class Social extends Model
 {
     //
     protected $fillable = [
-        'name'
+        'fb', 'l_i', 's_o', 'git'
     ];
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('link');
+        return $this->belongsTo(User::class);;
     }
 }

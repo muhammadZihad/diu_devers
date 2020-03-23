@@ -20,12 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('secondary_email')->nullable();
             $table->string('avatar')->nullable();
-            $table->text('about')->nullable();
             $table->string('slug')->nullable()->unique();
-            $table->boolean('gender')->nullable();
-            $table->string('phone')->nullable();
+            $table->boolean('gender');
             $table->integer('university_id')->nullable();
-            $table->date('date_of_birth')->nullable();
             $table->boolean('complete_setup')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
