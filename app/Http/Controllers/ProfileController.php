@@ -94,7 +94,7 @@ class ProfileController extends Controller
         $user = User::find(auth()->user()->id);
         // $user->deleteImage();
 
-        if ($user->avatar != 'default/avatar/male.png' && $user->avatar != 'default/avatar/female.png') {
+        if ($user->avatar != 'img/default/avatar/male.png' && $user->avatar != 'img/default/avatar/female.png') {
             $user->deleteImage();
         }
         $image = $request->image->store('avatar');
