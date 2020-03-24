@@ -44,13 +44,16 @@
             <form action="{{route('w_store')}}" method="post">
               @csrf
                     <div class="form-group mb-4">
-                        <textarea onkeypress="pp()" name="about" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us something about yourself in less than 350 characters..."></textarea>
+                        <textarea required onkeypress="pp()" name="about" class="form-control" value="{{ old('about') }}" id="exampleFormControlTextarea1" rows="3" placeholder="Tell us something about yourself in less than 350 characters..."></textarea>
                         <span id="count" class="countchar">0/350</span>
+                        @if ($errors->has('about'))
+                      <span class="error">{{ $errors->first('about') }}</span>
+                      @endif    
                     </div>
 
                     <div class="form-group mb-4">
                         <label for="exampleFormControlSelect1"><i class="fas fa-cogs"></i> Interested technology</label>
-                        <select maxlength="50" name="skills[]" class="js-select1 form-control " id="exampleFormControlSelect1" multiple>
+                        <select required maxlength="50" name="skills[]" class="js-select1 form-control " id="exampleFormControlSelect1" multiple>
                           @foreach ($skills as $item)
                         <option value="{{ $item->id }}">{{$item->name}}<option>
                           @endforeach
@@ -59,17 +62,23 @@
 
                       <div class="form-group">
                         <label for="exampleInputEmail1"><i class="fab fa-github-square"></i> Github link</label>
-                        <input name="git" type="text" class="form-control"  placeholder="https://github.com/....">
+                        <input name="git" type="text" class="form-control" value="{{ old('git') }}" required  placeholder="https://github.com/....">
+                        @if ($errors->has('git'))
+                  <span class="error">This field is required</span>
+                  @endif    
                       </div>
 
                       <div class="form-group">
                         <label for="exampleInputEmail1"><i class="fab fa-facebook-square"></i></i> Facebook link</label>
-                        <input name="fb" type="text" class="form-control" placeholder="https://facebook.com/....">
+                        <input name="fb" type="text" class="form-control" value="{{ old('fb') }}" required placeholder="https://facebook.com/....">
+                        @if ($errors->has('fb'))
+                  <span class="error">This field is required</span>
+                  @endif 
                       </div>
 
                       <div class="form-group mb-4">
                         <label for="exampleInputEmail1"><i class="fab fa-linkedin"></i> LinkedIn link</label>
-                        <input name="l_i" type="text" class="form-control" placeholder="https://linkedin.com/....">
+                        <input name="l_i" type="text" class="form-control" value="{{ old('l_i') }}" placeholder="https://linkedin.com/....">
                       </div>
 
                       <div class="form-group mt-3">

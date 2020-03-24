@@ -38,7 +38,7 @@
                  @csrf
  
                 <div class="form-label-group">
-                  <input type="email" name="email" id="inputEmail" class="form-control" @error('email') is-invalid @enderror" name="email" placeholder="Email address" required autocomplete="email" autofocus>
+                  <input type="email" name="email" id="inputEmail" class="form-control" @error('email') is-invalid @enderror" name="email" placeholder="Email address" value="{{ old('email') }}" required autocomplete="email" autofocus>
                   <label for="inputEmail">{{ __('E-Mail Address') }}</label>
  
                   @if ($errors->has('email'))

@@ -36,7 +36,7 @@
                <form action="{{ route('register') }}" method="POST" id="regForm">
                  {{ csrf_field() }}
                 <div class="form-label-group">
-                  <input type="text" id="inputName" name="name" class="form-control" placeholder="Full name" required autofocus>
+                  <input type="text" id="inputName" name="name" class="form-control" placeholder="Full name" value="{{ old('name') }}" required autofocus>
                   <label for="inputName">Name</label>
  
                   @if ($errors->has('name'))
@@ -45,7 +45,7 @@
  
                 </div> 
                 <div class="form-label-group">
-                  <input type="email" name="email" id="inputEmail" class="form-control" required placeholder="Email address" >
+                  <input type="email" name="email" id="inputEmail" class="form-control" value="{{ old('email') }}" required placeholder="Email address" >
                   <label for="inputEmail">Email address</label>
  
                   @if ($errors->has('email'))
