@@ -23,7 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $name,
         'email' => $faker->unique()->safeEmail,
         'slug' => str_slug($name),
-        'avatar' => 'default/avatar/male.png',
+        'avatar' => 'img/default/avatar/male.png',
         'gender' => 1,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

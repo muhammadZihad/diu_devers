@@ -11,7 +11,7 @@
           <div class="card overflow-hidden">
             <div class="card-header text-white bg-custom text-center">Profile Picture</div>
             <div class="card nb">
-            <img class="card-img-top img-thumbnail" src="{{asset('storage/'.$user->avatar)}}" alt="">
+            <img class="card-img-top img-thumbnail" src="{{asset(Str::startsWith($user->avatar,'img/') ? $user->avatar : 'storage/'.$user->avatar)}}" alt="">
             <div class="card-body">
               @if (auth()->user()->id == $user->id)
               <form action="{{route('image-save')}}" method="POST" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
            
 
             <blockquote class="blockquote mb-5">
-              <p class="h6 mb-0">{{ $user->profile->about }}</p>
+              <p class="h6 mb-0">{{ $user->profile? $user->profile->about: 'N/A' }}</p>
             <footer class="blockquote-footer text-right">About me</footer>
             </blockquote>
             <table class="table table-hover">
@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                   <td class="text-nowrap"><i class="fas fa-phone-square-alt"></i> Phone</td>
-                  <td>{{ $user->profile->phone ?: 'N/A' }}</td>
+                  <td>{{ $user->profile? $user->profile->phone : 'N/A' }}</td>
                 </tr>
                 <tr>
                   <td><i class="fab fa-facebook-square"> Facebook </td>

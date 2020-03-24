@@ -26,6 +26,6 @@ class HomeController extends Controller
     public function index()
     {
         Session::flash('success', 'Nice login man !');
-        return view('home')->with('users', User::all());
+        return view('home')->with('users', User::where('complete_setup', 1)->get());
     }
 }

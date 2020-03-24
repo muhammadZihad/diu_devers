@@ -66,9 +66,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         if ($data['gender']) {
-            $avatar = 'default/avatar/male.png';
+            $avatar = 'img/default/avatar/male.png';
         } else {
-            $avatar = 'default/avatar/female.png';
+            $avatar = 'img/default/avatar/female.png';
         }
         $user =  User::create([
             'name' => $data['name'],
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $user->slug = str_slug($user->name) . '-' . $user->id;
+        $user->slug = str_slug($user->name) . '-' . User::where('name', $user->name)->get()->count();
         $user->save();
         return $user;
     }

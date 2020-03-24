@@ -16,7 +16,7 @@
 
                     @foreach ($users as $item)
                     <div class="card text-center" style="width: 18rem;">
-                        <img style="max-width:150px;max-height:150px;" src="{{asset('storage/'.$item->avatar)}}" class="card-img-top mx-auto" alt="...">
+                        <img style="max-width:150px;max-height:150px;" src="{{asset(Str::startsWith($item->avatar,'img/') ? $item->avatar : 'storage/'.$item->avatar)}}" class="card-img-top mx-auto" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">{{ $item->name }}</h5>
                           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
