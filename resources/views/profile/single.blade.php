@@ -11,7 +11,7 @@
           <div class="card overflow-hidden">
             <div class="card-header text-white bg-custom text-center">Profile Picture</div>
             <div class="card nb">
-            <img class="card-img-top img-thumbnail" src="{{Storage::url($user->avatar)}}" alt="">
+            <img class="card-img-top img-thumbnail" src="{{asset('storage/'.$user->avatar)}}" alt="">
             <div class="card-body">
               @if (auth()->user()->id == $user->id)
               <form action="{{route('image-save')}}" method="POST" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                   <td class="text-nowrap"><i class="fas fa-graduation-cap"></i> University</td>
-                  <td>{{ $user->university->name ?: 'N/A'}}</td>
+                  <td>{{ $user->university ? $user->university->name : 'N/A'}}</td>
                 </tr>
                 <tr>
                   <td class="text-nowrap"><i class="fas fa-phone-square-alt"></i> Phone</td>
