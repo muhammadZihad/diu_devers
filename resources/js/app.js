@@ -24,6 +24,7 @@ Vue.component('friend-btn', require('./components/Friendbtn.vue').default);
 Vue.component('noty', require('./components/Notification.vue').default);
 Vue.component('friend-req', require('./components/Requests.vue').default);
 Vue.component('friends-list', require('./components/Friends.vue').default);
+Vue.component('post', require('./components/Post.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

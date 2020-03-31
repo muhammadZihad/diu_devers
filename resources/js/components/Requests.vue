@@ -1,17 +1,28 @@
 <template>
   <div>
     <ul class="list-group list-group-flush">
-      <li v-if="stop" class="list-group-item text-center text-info">No requests</li>
-      <li v-else class="list-group-item" v-for="(item, index) in lists" :key="item.id">
-        <div class="media-body">
-          <h5 class="mt-0 mb-1">{{ item.name }}</h5>
-          <div class="d-flex">
-            <button @click="accept_request(item.id,index)" class="btn btn-sm btn-light">
-              <i class="fas fa-check-circle text-success"></i> Accept
-            </button>
-            <button @click="cancel_request(item.id,index)" class="btn btn-sm btn-light">
-              <i class="fas fa-times-circle text-danger"></i> Cancel
-            </button>
+      <li v-if="stop" class="list-group-item text-center">No requests</li>
+      <li v-else class="list-group-item p-0 mb-2 nb" v-for="(item, index) in lists" :key="item.id">
+        <div class="media-body d-flex align-items-center">
+          <div class="img rounded-circle d-img mr-2"></div>
+          <div class="item">
+            <h5 class="mt-0 mb-1">
+              <a href class="text-custom">{{ item.name }}</a>
+            </h5>
+            <div class="d-flex">
+              <button
+                @click="accept_request(item.id,index)"
+                class="btn btn-sm btn-success bg-custom text-white nr"
+              >
+                <i class="fas fa-check-circle"></i> Accept
+              </button>
+              <button
+                @click="cancel_request(item.id,index)"
+                class="btn btn-sm btn-danger text-white nr"
+              >
+                <i class="fas fa-times-circle"></i> Cancel
+              </button>
+            </div>
           </div>
         </div>
       </li>

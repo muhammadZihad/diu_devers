@@ -25,15 +25,12 @@ Route::group(['middleware' => ['auth', 'notwelcome']], function () {
 });
 
 
-// Route::get('login', 'AuthController@index')->name('login');
-// Route::post('post-login', 'AuthController@postLogin');
-// Route::get('registration', 'AuthController@registration')->name('register');
-// Route::post('post-registration', 'AuthController@postRegistration');
-// Route::get('dashboard', 'AuthController@dashboard')->name('dash');
-// Route::post('logout', 'AuthController@logout')->name('logout');
 Auth::routes();
 
-
+Route::get('/demo', function () {
+    return view('homepage');
+    // return User::find(8)->friends();
+});
 Route::group(['middleware' => ['auth', 'complete']], function () {
     Route::get('/friends', 'FriendController@friends');
     Route::get('/friends_paginate', 'FriendController@friends_paginate');

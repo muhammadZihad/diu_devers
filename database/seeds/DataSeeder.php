@@ -17,5 +17,6 @@ class DataSeeder extends Seeder
         factory(App\User::class, 10)->create();
         factory(App\University::class, 10)->create();
         factory(App\Skill::class, 10)->create();
+        factory(App\Post::class, 10)->create();
     }
 }

@@ -136,6 +136,79 @@
     padding: 0;
     font-weight: 600;
   }
+
+  .img-box{
+    width:100%;
+    max-height: 200px;
+    overflow: hidden;
+  }
+  .img-box .avatar{
+    width: 100%;
+    max-width: 200px;
+  }
+  li.nb{
+    background:transparent;
+  }
+
+  .b1{
+    border:1px solid #2BBD91;
+  }
+  hr{
+    margin-top: 0.5rem ;
+  }
+
+  /* --------------------------------- this will be deleted */
+  .d-img{
+    height:50px;
+    width: 50px;
+    background: #571528;
+  }
+  .post-img{
+    width:100%;
+    height: 250px;
+    background: #571528;
+
+  }
+
+  .link-img-box{
+    height: 80px;
+    width:80px;
+    background: #571528;
+  }
+  .b-like,.b-clap{
+    box-sizing: border-box;
+    background: transparent;
+    transition: ease-in cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .b-like{
+    border:2px solid #2BBD91;
+    color: #2BBD91;
+  }
+  .b-clap{
+    border:2px solid #fe346e;
+    color: #fe346e;
+  }
+  .b-like.bg,.b-like:hover{
+    background: #2BBD91;
+    color: white;
+  }
+  .b-clap.bg,.b-clap:hover{
+    background: #fe346e;
+    color: white;
+  }
+  .btn.bg-custom:hover{
+    background:rgb(11, 129, 94) !important;
+  }
+  body{
+    background: #f1f1f1 !important;
+  }
+  .post{
+    background:white;
+  }
+  .sidebar{
+    width:100%;
+  }
+  /* ...................................delete this */
   /* Fallback for Edge
   -------------------------------------------------- */
    

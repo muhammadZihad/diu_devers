@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Friendship;
+use App\Post;
 use App\User;
 
 trait Friendable
@@ -71,22 +72,27 @@ trait Friendable
         $f1 = Friendship::where('status', 1)->where(function ($q) {
             $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
         })->get();
+        $ids = array();
         foreach ($f1 as $ff) {
-            array_push($frnds, User::find($ff->req_by));
+            $ff->req_by == $this->id ? array_push($ids, $ff->req_to) : array_push($ids, $ff->req_by);
         }
-        return $frnds;
+        return User::whereIn('id', $ids)->get();
     }
     public function friends_paginate()
     {
-        $frnds = array();
+        $ids = array();
         $result = array();
         $f1 = Friendship::where('status', 1)->where(function ($q) {
             $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
         })->paginate(1);
         foreach ($f1 as $ff) {
-            array_push($frnds, User::find($ff->req_by));
+            if ($ff->req_by != $this->id) {
+                array_push($ids, $ff->req_by);
+            } else {
+                array_push($ids, $ff->req_to);
+            }
         }
-        $result["data"] = $frnds;
+        $result["data"] = User::whereIn('id', $ids)->get();
         $result["first"] = $f1->onFirstPage();
         $result["prev"] = $f1->previousPageUrl();
         $result["next"] = $f1->nextPageUrl();
@@ -144,5 +150,19 @@ trait Friendable
         } else {
             return -1;
         }
+    }
+
+    public function f_post()
+    {
+        $ids = array();
+        $result = array();
+        $f1 = Friendship::where('status', 1)->where(function ($q) {
+            $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
+        })->get();
+        foreach ($f1 as $ff) {
+            $ff->req_by == $this->id ? array_push($ids, $ff->req_to) : array_push($ids, $ff->req_by);
+        }
+        $result = Post::whereIn('user_id', $ids)->orderBy('created_at', 'Desc')->with('user:id,name,avatar,slug')->paginate(5);
+        return $result;
     }
 }

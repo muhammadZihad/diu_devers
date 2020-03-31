@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+    @yield('css')
 </head>
-<body class="bg-light">
+<body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top ">
             <div class="container">
                 <a class="navbar-brand text-custom mlogo" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}

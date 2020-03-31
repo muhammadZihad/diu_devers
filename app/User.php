@@ -56,6 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'skill_user');
     }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
     public function hasSkill($sid)
     {
         return in_array($sid, $this->skills->pluck('id')->toArray());
@@ -80,5 +84,10 @@ class User extends Authenticatable
     public function deleteImage()
     {
         unlink('storage/' . $this->avatar);
+    }
+
+    public function getAvatarAttribute($avatar)
+    {
+        return asset(Storage::url($avatar));
     }
 }
