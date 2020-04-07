@@ -2046,8 +2046,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.lists = response.data.data;
         _this.more = response.data.more;
         _this.next = response.data.next;
+
+        _this.check_list();
       });
-      this.check_list();
     },
     loadmore: function loadmore(nextUrl) {
       var _this2 = this;
@@ -2068,8 +2069,9 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data === "ok") {
           _this3.lists.splice(index, 1);
         }
+
+        _this3.check_list();
       });
-      this.check_list();
     },
     check_list: function check_list() {
       if (this.lists.length === 0) {
@@ -2163,7 +2165,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      lists: [],
+      cache: [],
+      more: false,
+      readmore: false,
+      next: "",
+      stop: false
+    };
+  },
+  mounted: function mounted() {
+    this.getFriends();
+  },
+  methods: {
+    getFriends: function getFriends() {
+      var _this = this;
+
+      axios.get("/post").then(function (response) {
+        _this.lists = response.data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -47667,7 +47720,7 @@ var render = function() {
           : _vm._l(_vm.lists, function(item, index) {
               return _c(
                 "li",
-                { key: item.id, staticClass: "list-group-item" },
+                { key: item.id, staticClass: "list-group-item nb" },
                 [
                   _c("div", { staticClass: "media-body" }, [
                     _c("h5", { staticClass: "mt-0 mb-1" }, [
@@ -47763,76 +47816,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    _vm._l(_vm.lists, function(post, index) {
+      return _c("div", { key: post.id, staticClass: "row post mb-2 p-2" }, [
+        _c("div", { staticClass: "col-12 flex-column" }, [
+          _c("div", { staticClass: "d-flex" }, [
+            _c("div", {
+              staticClass: "img img-responsive rounded-circle d-img mr-2"
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("div", { staticClass: "d-flex flex-column" }, [
+                _c("h5", { staticClass: "h5 text-custom m-0" }, [
+                  _c("a", { attrs: { href: post.user.slug } }, [
+                    _vm._v(_vm._s(post.user.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "small m-0" }, [
+                  _vm._v(_vm._s(post.created_at))
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            !_vm.readmore
+              ? _c("span", [
+                  _vm._v(
+                    _vm._s(post.content.slice(0, 100)) + "\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            !_vm.readmore
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        _vm.readmore = !_vm.readmore
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    read more..\n                "
+                    )
+                  ]
+                )
+              : _c("span", [_vm._v(_vm._s(post.content))])
+          ]),
+          _vm._v(" "),
+          post.img
+            ? _c("div", { staticClass: "row justify-content-center" }, [
+                _vm._m(0, true)
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          post.link
+            ? _c("div", { staticClass: "row p-2" }, [_vm._m(1, true)])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._m(2, true)
+        ])
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row post mb-2 p-2" }, [
-      _c("div", { staticClass: "col-12 flex-column" }, [
-        _c("div", { staticClass: "d-flex" }, [
-          _c("div", {
-            staticClass: "img img-responsive rounded-circle d-img mr-2"
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "d-flex align-items-center" }, [
-            _c("div", { staticClass: "d-flex flex-column" }, [
-              _c("h5", { staticClass: "h5 text-custom m-0" }, [
-                _vm._v("Muhammad Zihad")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "small m-0" }, [
-                _vm._v("12:30 26 March 2020")
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "col-8" }, [
+      _c("div", { staticClass: "post-img" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 d-flex b1 p-2" }, [
+      _c("div", { staticClass: "d-flex align-items-center" }, [
+        _c("div", { staticClass: "link-img-box" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "link-details ml-2" }, [
+        _c("h4", { staticClass: "h5 text-custom" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("github/muhammadZihad")])
         ]),
         _vm._v(" "),
-        _c("p", [
+        _c("p", { staticClass: "m-0 text-muted" }, [
           _vm._v(
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus iusto mollitia neque a ratione quia, culpa consequuntur, quibusdam, asperiores officiis eligendi quod tempora soluta sed dicta sunt aspernatur vitae. Aliquam."
+            "\n                            Lorem, ipsum dolor sit amet consectetur\n                            adipisicing elit. Non fuga quos optio corrupti\n                            voluptas itaque aut quisquam sit mollitia\n                            asperiores.\n                        "
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-8" }, [
-            _c("div", { staticClass: "post-img" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row p-2" }, [
-          _c("div", { staticClass: "col-12 d-flex b1 p-2" }, [
-            _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("div", { staticClass: "link-img-box" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "link-details ml-2" }, [
-              _c("h4", { staticClass: "h5 text-custm" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("github/muhammadZihad")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "m-0 text-muted" }, [
-                _vm._v(
-                  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non fuga quos optio corrupti voluptas itaque aut quisquam sit mollitia asperiores."
-                )
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-4 p-2" }, [
-            _c("button", { staticClass: "btn-sm nr b-like" }, [_vm._v("Like")]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn-sm nr b-clap bg" }, [
-              _vm._v("Claped")
-            ])
-          ])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6 p-2" }, [
+        _c("button", { staticClass: "btn-sm nr b-like" }, [_vm._v("Like")]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn-sm nr b-clap bg" }, [_vm._v("Claped")])
       ])
     ])
   }
@@ -60188,7 +60282,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -60198,7 +60292,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  broadcaster: 'pusher',
+  broadcaster: "pusher",
   key: "9c2eaa60f96b3cb035c8",
   cluster: "ap1",
   forceTLS: true

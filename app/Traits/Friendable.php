@@ -76,7 +76,7 @@ trait Friendable
         foreach ($f1 as $ff) {
             $ff->req_by == $this->id ? array_push($ids, $ff->req_to) : array_push($ids, $ff->req_by);
         }
-        return User::whereIn('id', $ids)->get();
+        return $ids;
     }
     public function friends_paginate()
     {
@@ -120,7 +120,7 @@ trait Friendable
 
     public function friend_ids()
     {
-        return collect($this->friends())->pluck('id')->toArray();
+        return $this->friends();
     }
 
     public function is_friend($user_id)
@@ -154,7 +154,7 @@ trait Friendable
 
     public function f_post()
     {
-        $ids = array();
+        $ids = array([$this->id]);
         $result = array();
         $f1 = Friendship::where('status', 1)->where(function ($q) {
             $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
@@ -162,7 +162,7 @@ trait Friendable
         foreach ($f1 as $ff) {
             $ff->req_by == $this->id ? array_push($ids, $ff->req_to) : array_push($ids, $ff->req_by);
         }
-        $result = Post::whereIn('user_id', $ids)->orderBy('created_at', 'Desc')->with('user:id,name,avatar,slug')->paginate(5);
+        $result = Post::whereIn('user_id', $ids)->orderBy('created_at', 'Desc')->with('user:id,name,avatar,slug')->paginate(4);
         return $result;
     }
 }

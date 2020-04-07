@@ -206,7 +206,8 @@
     background:white;
   }
   .sidebar{
-    width:100%;
+    position: fixed;
+    width:auto;
   }
   /* ...................................delete this */
   /* Fallback for Edge

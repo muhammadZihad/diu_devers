@@ -66,6 +66,14 @@
                                 <a class="dropdown-item" href="{{ route('profile.edit',auth()->user()->slug) }}">
                                     Edit profile
                                 </a>
+                                @handheld
+                                <a class="dropdown-item" href="{{ route('profile.edit',auth()->user()->slug) }}">
+                                    Friends
+                                </a>
+                                <a class="dropdown-item" href="{{ route('profile.edit',auth()->user()->slug) }}">
+                                    Friend Request
+                                </a>
+                                @endhandheld
                                 <hr>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

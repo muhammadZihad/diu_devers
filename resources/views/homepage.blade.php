@@ -80,8 +80,8 @@ textarea{
     <div class="container">
         <div class="row justify-content-center">
             {{-- This is left sidebar --}}
-            <div class="col-md-3">
-                <div class="sidebar sticky-top">
+            <div class="d-none d-md-block col-md-3">
+                <div class="sidebar bg-white p-2">
                     <div class="img-box nr text-center">
                         <img src="{{asset('storage/avatar/cgqOYLnjNQwHlPFSZvGyDHSUwlVKwovQNbRJJyzx.jpeg')}}" alt="" class="avatar">
                         </div>
@@ -96,7 +96,7 @@ textarea{
             {{-- This is newsfeed --}}
             <div class="col-md-6">
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-12 bg-white p-0">
                         <div class="d-flex justify-content-between align-items-center b1 p-2">
                             <div class="text-secondary">Working on a new <strong>project</strong> ?</div>
                             <button class="btn nr bg-custom text-white" data-toggle="modal" data-target="#exampleModalCenter"><strong>Post here</strong></button>
@@ -105,7 +105,7 @@ textarea{
 
 
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog " role="document">
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title text-custom" id="exampleModalLongTitle">Create New Post</h5>
@@ -113,12 +113,8 @@ textarea{
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-
-
-
-
+                        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
-                                <form action="" method="POST">
                                 @csrf
                                 <div class="form-group ct">
                                     <textarea class="form-control nb" name="content" onkeyup="charcountupdate(this.value)" rows="4" placeholder="Say something about your project"></textarea>
@@ -132,10 +128,10 @@ textarea{
                             </div>
                             <div class="modal-footer">
                                 <div class="c-file-div float-left">
-                                    <input class="c-file" type="file">
+                                    <input class="c-file" name="image" type="file">
                                     <a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
                                 </div>   
-                              <button type="button" class="btn bg-custom nb nr text-white">Post</button>
+                                <input type="submit" value="Post" class="btn bg-custom text-white nb nr">
                             </div>
                         </form>
 
@@ -150,16 +146,14 @@ textarea{
                     </div>
                 </div>
                 <post></post>
-                <post></post>
-                <post></post>
             </div>
             {{-- This is right sidebar --}}
             <div class="col-md-3">
-                <div class="sidebar .d-sm-none .d-md-block sticky-top">
-                   <h5 class="text-custom">Friend Requests</h5>
+                <div class="d-none d-md-block sidebar bg-white p-2 ml-5">
+                   <h5 class="text-custom text-center"><u>Friend Requests</u></h5>
                 <friend-req :myid="{{auth()->user()->id}}"></friend-req>
                 <hr>
-                <h5 class="text-custom">Friends</h5>
+                <h5 class="text-custom text-center"><u>Friends</u></h5>
                 <friends-list></friends-list> 
                 </div>
                 

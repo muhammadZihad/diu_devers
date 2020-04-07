@@ -3,7 +3,7 @@
     <ul class="list-group list-group-flush">
       <li v-if="stop" class="list-group-item text-center">No friends</li>
 
-      <li v-else class="list-group-item" v-for="(item, index) in lists" :key="item.id">
+      <li v-else class="list-group-item nb" v-for="(item, index) in lists" :key="item.id">
         <div class="media-body">
           <h5 class="mt-0 mb-1">{{ item.name }}</h5>
           <div class="d-flex">
@@ -40,8 +40,8 @@ export default {
         this.lists = response.data.data;
         this.more = response.data.more;
         this.next = response.data.next;
+        this.check_list();
       });
-      this.check_list();
     },
     loadmore(nextUrl) {
       axios.get(nextUrl).then(response => {
@@ -58,8 +58,8 @@ export default {
         if (response.data === "ok") {
           this.lists.splice(index, 1);
         }
+        this.check_list();
       });
-      this.check_list();
     },
     check_list() {
       if (this.lists.length === 0) {

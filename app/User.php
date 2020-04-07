@@ -60,6 +60,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(Likes::class);
+    }
     public function hasSkill($sid)
     {
         return in_array($sid, $this->skills->pluck('id')->toArray());

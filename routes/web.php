@@ -11,6 +11,7 @@
 |
 */
 
+use App\Post;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,9 +30,13 @@ Auth::routes();
 
 Route::get('/demo', function () {
     return view('homepage');
-    // return User::find(8)->friends();
 });
+
+Route::get('/like/{id}/{type}', 'PostController@likeme')->name('like');
+Route::get('/like/{id}', 'PostController@unlikeme')->name('unlike');
+
 Route::group(['middleware' => ['auth', 'complete']], function () {
+    Route::resource('post', 'PostController');
     Route::get('/friends', 'FriendController@friends');
     Route::get('/friends_paginate', 'FriendController@friends_paginate');
     Route::post('/profileimage/store', 'ProfileController@image_change')->name('image-save');
