@@ -6,7 +6,7 @@
       class="btn form-control nb text-white btn-danger"
     >Cancel Request</button>
     <button
-      class="btn form-control nb bg-custom"
+      class="btn form-control nb bg-custom text-white"
       v-else-if="status===2"
       @click="accept_request()"
     >Accept</button>
@@ -23,7 +23,7 @@
     <button
       v-if="status===2"
       @click="cancel_request()"
-      class="btn form-control nb btn-danger"
+      class="btn form-control nb btn-danger text-white"
     >Cancel</button>
   </div>
 </template>

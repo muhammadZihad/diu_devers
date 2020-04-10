@@ -84,7 +84,7 @@ trait Friendable
         $result = array();
         $f1 = Friendship::where('status', 1)->where(function ($q) {
             $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
-        })->paginate(1);
+        })->paginate(5);
         foreach ($f1 as $ff) {
             if ($ff->req_by != $this->id) {
                 array_push($ids, $ff->req_by);
@@ -105,7 +105,7 @@ trait Friendable
         $result = array();
         $frnds = array();
         $link = array();
-        $f1 = Friendship::where('status', 0)->where('req_to', $this->id)->paginate(1);
+        $f1 = Friendship::where('status', 0)->where('req_to', $this->id)->paginate(5);
         // return $f1->nextPageUrl();
         foreach ($f1 as $ff) {
             array_push($frnds, User::find($ff->req_by));
@@ -150,19 +150,5 @@ trait Friendable
         } else {
             return -1;
         }
-    }
-
-    public function f_post()
-    {
-        $ids = array([$this->id]);
-        $result = array();
-        $f1 = Friendship::where('status', 1)->where(function ($q) {
-            $q->where('req_to', $this->id)->orWhere('req_by', $this->id);
-        })->get();
-        foreach ($f1 as $ff) {
-            $ff->req_by == $this->id ? array_push($ids, $ff->req_to) : array_push($ids, $ff->req_by);
-        }
-        $result = Post::whereIn('user_id', $ids)->orderBy('created_at', 'Desc')->with('user:id,name,avatar,slug')->paginate(4);
-        return $result;
     }
 }

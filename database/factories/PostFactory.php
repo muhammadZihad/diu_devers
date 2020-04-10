@@ -10,6 +10,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'content' => $faker->paragraph(10),
         'user_id' => 6,
         'link' => 'github.com/muhammadZihad',
-        'img' => 'none'
+        'avatar' => 'none'
     ];
 });

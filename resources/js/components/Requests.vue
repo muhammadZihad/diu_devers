@@ -4,10 +4,12 @@
       <li v-if="stop" class="list-group-item text-center">No requests</li>
       <li v-else class="list-group-item p-0 mb-2 nb" v-for="(item, index) in lists" :key="item.id">
         <div class="media-body d-flex align-items-center">
-          <div class="img rounded-circle d-img mr-2"></div>
+          <div class="img rounded-circle d-img mr-2">
+            <img class="a-img" v-bind:src="item.avatar" alt />
+          </div>
           <div class="item">
             <h5 class="mt-0 mb-1">
-              <a href class="text-custom">{{ item.name }}</a>
+              <a :href="item.slug" class="text-custom">{{ item.name }}</a>
             </h5>
             <div class="d-flex">
               <button

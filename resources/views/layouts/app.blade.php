@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Dever's | @yield('title')</title>
+    <link rel="icon" href="{{ asset('img/bg/icon.png') }}" type="image/icon type">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -39,9 +40,10 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
+                    <search></search>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    
+                    <ul class="navbar-nav ml-md-5">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
@@ -56,7 +58,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                               <b>{{ Auth::user()->name }} </b> <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu nr" aria-labelledby="navbarDropdown">
@@ -72,6 +74,9 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('profile.edit',auth()->user()->slug) }}">
                                     Friend Request
+                                </a>
+                                <a class="dropdown-item" href="{{ route('search') }}">
+                                    Search
                                 </a>
                                 @endhandheld
                                 <hr>

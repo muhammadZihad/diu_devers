@@ -31,14 +31,14 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
-              <h1 class="login-heading mb-4">Dever's</h1>
+              <h1 class="login-heading mb-4 text-custom">Dever's</h1>
               <h4 class="login-heading mb-3">Welcome back <i class="fa fa-comment" aria-hidden="true"></i></h4>
                <form action="{{ route('login') }}" method="POST" id="logForm">
  
                  @csrf
  
                 <div class="form-label-group">
-                  <input type="email" name="email" id="inputEmail" class="form-control" @error('email') is-invalid @enderror" name="email" placeholder="Email address" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                  <input type="email" name="email" id="inputEmail" class="form-control nr" @error('email') is-invalid @enderror" name="email" placeholder="Email address" value="{{ old('email') }}" required autocomplete="email" autofocus>
                   <label for="inputEmail">{{ __('E-Mail Address') }}</label>
  
                   @if ($errors->has('email'))
@@ -47,7 +47,7 @@
                 </div> 
  
                 <div class="form-label-group">
-                  <input type="password" name="password" id="inputPassword" required class="form-control" placeholder="Password" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                  <input type="password" name="password" id="inputPassword" required class="form-control nr" placeholder="Password" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                   <label for="inputPassword">{{ __('Password') }}</label>
                    
                   @if ($errors->has('password'))
@@ -67,7 +67,7 @@
                 </div>
 
  
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit"> {{ __('Login') }}</button>
+                <button class="btn btn-lg bg-custom btn-block btn-login text-uppercase font-weight-bold mb-2 nr" type="submit"> {{ __('Login') }}</button>
                 
                 <div class="text-center">If you have an account?
                   <a class="small" href="{{route('register')}}">Sign Up</a></div>

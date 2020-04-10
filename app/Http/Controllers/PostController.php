@@ -12,7 +12,10 @@ class PostController extends Controller
 
     public function index()
     {
-        return auth()->user()->f_post();
+        $ids = auth()->user()->friends();
+        array_push($ids, Auth::id());
+        $posts = Post::whereIn('user_id', $ids)->orderBy('created_at', 'Desc')->with('user:id,name,avatar,slug')->paginate(5);
+        return $posts;
     }
 
     public function create()
@@ -34,9 +37,9 @@ class PostController extends Controller
             'content' => $request->content,
             'user_id' => $id,
             'link' => $request->link ?: 'null',
-            'img' => $image ?: 'null'
+            'avatar' => $image ?: 'null'
         ]);
-        return $post;
+        return redirect(route('home'));
     }
 
 
@@ -63,13 +66,17 @@ class PostController extends Controller
         $like->post_id = $id;
         $like->user_id = auth()->user()->id;
         $like->type = $type;
-        $like->save();
-        // return response()->json(200, 'Like Done');
+        if ($like->save()) {
+            return response()->json("success", 200);
+        }
+        return response()->json("error", 501);
     }
-    public function unlikeme($id)
+    public function unlikeme($id, $type)
     {
-        $like = Likes::find($id);
-        $like->delete();
-        return 'Done';
+        $like = Likes::where('post_id', $id)->where('user_id', auth()->user()->id)->where('type', $type)->first();
+        if ($like->delete()) {
+            return response()->json("success", 200);
+        }
+        return response()->json("error", 501);
     }
 }

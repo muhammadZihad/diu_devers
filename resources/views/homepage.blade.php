@@ -81,16 +81,21 @@ textarea{
         <div class="row justify-content-center">
             {{-- This is left sidebar --}}
             <div class="d-none d-md-block col-md-3">
-                <div class="sidebar bg-white p-2">
-                    <div class="img-box nr text-center">
-                        <img src="{{asset('storage/avatar/cgqOYLnjNQwHlPFSZvGyDHSUwlVKwovQNbRJJyzx.jpeg')}}" alt="" class="avatar">
-                        </div>
-                        <ul class="list-group">
-                            <li class="list-group-item nb"><b><a href="#" class="text-custom">Profile</a></b></li>
-                            <li class="list-group-item nb"><b><a href="#" class="text-custom">Friends</a></b></li>
-                            <li class="list-group-item nb"><b><a href="#" class="text-custom">Friend Requests</a></b></li>
-                            <li class="list-group-item nb"><b><a href="#" class="text-custom">Search People</a></b></li>
-                        </ul>
+                <div class="sidebar bg-white">
+                    <div class="card nb">
+                        <div class="card-header bg-custom text-white">My Profile</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="img-box nr text-center">
+                            <img src="{{auth()->user()->avatar}}" alt="" class="avatar">
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item nb"><b><a href="{{'/'. auth()->user()->slug }}" class="text-custom">Profile</a></b></li>
+                                <li class="list-group-item nb"><b><a href="{{ route('friends') }}" class="text-custom">Friends</a></b></li>
+                                <li class="list-group-item nb"><b><a href="{{ route('requests') }}" class="text-custom">Friend Requests</a></b></li>
+                                <li class="list-group-item nb"><b><a href="{{ route('search.view') }}" class="text-custom">Search People</a></b></li>
+                            </ul>
+                    </div>
                 </div>
             </div>
             {{-- This is newsfeed --}}
@@ -145,16 +150,29 @@ textarea{
                         <hr>
                     </div>
                 </div>
-                <post></post>
+                <post :uid="{{ auth()->user()->id }}"></post>
             </div>
             {{-- This is right sidebar --}}
             <div class="col-md-3">
-                <div class="d-none d-md-block sidebar bg-white p-2 ml-5">
-                   <h5 class="text-custom text-center"><u>Friend Requests</u></h5>
-                <friend-req :myid="{{auth()->user()->id}}"></friend-req>
+                <div class="d-none d-md-block sidebar p-0 ml-5">
+                    <div class="card nb">
+                        <div class="card-header bg-custom text-white">
+                   Friend Requests
+
+                        </div>
+                        <div class="card-body">
+                            <friend-req :myid="{{auth()->user()->id}}"></friend-req>
+                        </div>
+                    </div>
                 <hr>
-                <h5 class="text-custom text-center"><u>Friends</u></h5>
-                <friends-list></friends-list> 
+                <div class="card nb">
+                    <div class="card-header bg-custom text-white">
+                        Friends
+                    </div>
+                    <div class="card-body">
+                        <friends-list></friends-list> 
+                    </div>
+                </div>
                 </div>
                 
             </div>

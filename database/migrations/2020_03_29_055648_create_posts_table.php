@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->text('content');
             $table->string('link');
-            $table->string('img');
+            $table->string('avatar');
             $table->timestamps();
         });
     }

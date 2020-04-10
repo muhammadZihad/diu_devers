@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Friendship;
 use App\Profile;
 use App\Skill;
 use App\Social;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -94,7 +96,7 @@ class ProfileController extends Controller
         $user = User::find(auth()->user()->id);
         // $user->deleteImage();
 
-        if ($user->avatar != 'img/default/avatar/male.png' && $user->avatar != 'img/default/avatar/female.png') {
+        if ($user->avatar != 'http://devers.test/storage/default/avatar/male.png' && $user->avatar != 'http://devers.test/storage/default/avatar/female.png') {
             $user->deleteImage();
         }
         $image = $request->image->store('avatar');
@@ -146,5 +148,14 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function friendlist(){
+        return view('frnd.friends')->with('result',User::find(auth()->user()->friends()));
+    }
+    public function requests(){
+        $frnds = array();
+        $f1 = Friendship::where('status', 0)->where('req_to', Auth::id())->get();
+        $result = User::find($f1->pluck('req_by'));
+        return view('frnd.requests')->with('result',$result);
     }
 }

@@ -31,12 +31,12 @@
         <div class="container">
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
-              <h1 class="login-heading mb-4">Dever's</h1>
+              <h1 class="login-heading mb-4 text-custom">Dever's</h1>
               <h4 class="login-heading mb-3">Register here <i class="fa fa-hand-o-down" aria-hidden="true"></i> </h4>
                <form action="{{ route('register') }}" method="POST" id="regForm">
                  {{ csrf_field() }}
                 <div class="form-label-group">
-                  <input type="text" id="inputName" name="name" class="form-control" placeholder="Full name" value="{{ old('name') }}" required autofocus>
+                  <input type="text" id="inputName" name="name" class="form-control nr" placeholder="Full name" value="{{ old('name') }}" required autofocus>
                   <label for="inputName">Name</label>
  
                   @if ($errors->has('name'))
@@ -45,7 +45,7 @@
  
                 </div> 
                 <div class="form-label-group">
-                  <input type="email" name="email" id="inputEmail" class="form-control" value="{{ old('email') }}" required placeholder="Email address" >
+                  <input type="email" name="email" id="inputEmail" class="form-control nr" value="{{ old('email') }}" required placeholder="Email address" >
                   <label for="inputEmail">Email address</label>
  
                   @if ($errors->has('email'))
@@ -55,7 +55,7 @@
  
                 <div class="form-label-group">
 
-                  <select name="gender" required id="gender" class="form-control">
+                  <select name="gender" required id="gender" class="form-control nr">
                     <option disabled selected>Select gender</option>
                     <option value="1">Male</option>
                     <option value="0">Female</option>
@@ -67,7 +67,7 @@
                 </div>
  
                 <div class="form-label-group">
-                  <input type="password" name="password" required id="inputPassword" class="form-control" placeholder="Password">
+                  <input type="password" name="password" required id="inputPassword" class="form-control nr" placeholder="Password">
                   <label for="inputPassword">Password</label>
                    
                   @if ($errors->has('password'))
@@ -75,13 +75,13 @@
                   @endif  
                 </div>
                 <div class="form-label-group">
-                  <input type="password" name="password_confirmation" required id="password-confirm" class="form-control" placeholder="Password confirm" autocomplete="new-password">
+                  <input type="password" name="password_confirmation" required id="password-confirm" class="form-control nr" placeholder="Password confirm" autocomplete="new-password">
                   <label for="password-confirm">Password confirm</label>
 
                 </div>
 
  
-                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign Up</button>
+                <button class="btn btn-lg bg-custom nr btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign Up</button>
                 <div class="text-center">If you have an account?
                   <a class="small" href="{{url('login')}}">Sign In</a></div>
               </form>

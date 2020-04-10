@@ -3,13 +3,20 @@
     <ul class="list-group list-group-flush">
       <li v-if="stop" class="list-group-item text-center">No friends</li>
 
-      <li v-else class="list-group-item nb" v-for="(item, index) in lists" :key="item.id">
-        <div class="media-body">
-          <h5 class="mt-0 mb-1">{{ item.name }}</h5>
-          <div class="d-flex">
-            <button @click="unfriend(item.id,index)" class="btn btn-sm btn-light">
-              <i class="fas fa-times-circle text-danger"></i> Unfriend
-            </button>
+      <li v-else class="list-group-item nb p-0 mb-2" v-for="(item, index) in lists" :key="item.id">
+        <div class="media-body d-flex">
+          <div class="rounded-circle d-img mr-2">
+            <img class="a-img" v-bind:src="item.avatar" alt />
+          </div>
+          <div class="media-content">
+            <h5 class="mt-0 mb-1">
+              <a :href="item.slug" class="text-custom">{{ item.name }}</a>
+            </h5>
+            <div class="d-flex">
+              <button @click="unfriend(item.id,index)" class="btn btn-sm btn-danger text-white nr">
+                <i class="fas fa-times-circle text-white"></i> Unfriend
+              </button>
+            </div>
           </div>
         </div>
       </li>

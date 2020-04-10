@@ -7,7 +7,9 @@
   .image {
     min-height: 100vh;
   }
-   
+   /* body{
+    font-family: 'Source Sans Pro', sans-serif !important;
+   } */
   .bg-image {
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/form-bk.jpg');
     background-size: cover;
@@ -118,7 +120,7 @@
   }
 
   .nr{
-    border-radius: 0;
+    border-radius: 0 !important;
   }
   .nr a:hover{
     background: #2BBD91;
@@ -161,13 +163,20 @@
   .d-img{
     height:50px;
     width: 50px;
-    background: #571528;
+    border-radius: 50%;
+    overflow:hidden;
+  }
+  .a-img{
+    width: 100%;
+    height:100%;
   }
   .post-img{
     width:100%;
-    height: 250px;
-    background: #571528;
+    border:1px solid rgb(160, 160, 160);
+  }
 
+  button:focus{
+    outline: none;
   }
 
   .link-img-box{
@@ -209,6 +218,66 @@
     position: fixed;
     width:auto;
   }
+  .par{
+    position: relative;
+  }
+  .parc{
+    position: absolute;
+    top: 70%;
+    width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 1s;
+  }
+  .d-n{
+    visibility: visible;
+    opacity: 1;
+  }
+  .parc li{
+    display: flex !important;
+    align-items: center;
+  }
+  .cp{
+    position:absolute;
+    top: 0;
+    right:0;
+  }
+  .card-header{
+    font-weight: bold;
+  }
+input.form-control:focus{
+  outline: none;
+  box-shadow: none;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #2BBD91;
+  outline: none;
+  box-shadow: none;
+}
+.bg-custom2{
+  background: #fe346e;
+}
+.bg-custom2:hover{
+  background: #ac2148;
+}
+.s-img{
+  height:100px;
+  width:100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+}
+.list-group-item .form-group{
+  margin: 0 !important;
+}
+.j-c-sb{
+  justify-content: space-between;
+}
   /* ...................................delete this */
   /* Fallback for Edge
   -------------------------------------------------- */

@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Storage;
 class Post extends Model
 {
     //
-    // public $with = ['user'];
-    protected $fillable = ['content', 'link', 'img', 'user_id'];
+    public $with = ['user', 'likes'];
+    protected $fillable = ['content', 'link', 'avatar', 'user_id'];
 
     public function user()
     {

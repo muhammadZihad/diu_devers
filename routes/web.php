@@ -32,11 +32,18 @@ Route::get('/demo', function () {
     return view('homepage');
 });
 
-Route::get('/like/{id}/{type}', 'PostController@likeme')->name('like');
-Route::get('/like/{id}', 'PostController@unlikeme')->name('unlike');
+
 
 Route::group(['middleware' => ['auth', 'complete']], function () {
+    Route::get('/friendlist','ProfileController@friendlist')->name('friends');
+    Route::get('/requests','ProfileController@requests')->name('requests');
+    Route::get('/search', 'SearchController@view')->name('search.view');
+    Route::get('/search/{sid}', 'SearchController@search2')->name('search.cat');
+    Route::get('/searcher/{key}', 'SearchController@index');
+    Route::post('/search', 'SearchController@search')->name('search');
     Route::resource('post', 'PostController');
+    Route::get('/like/{id}/{type}', 'PostController@likeme')->name('like');
+    Route::get('/unlike/{id}/{type}', 'PostController@unlikeme')->name('unlike');
     Route::get('/friends', 'FriendController@friends');
     Route::get('/friends_paginate', 'FriendController@friends_paginate');
     Route::post('/profileimage/store', 'ProfileController@image_change')->name('image-save');
